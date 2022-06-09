@@ -107,33 +107,27 @@ public class enemyController : MonoBehaviour
     public void Attack()
     {
         Damage();
-        if (playerController.pDefence > 0)
+        Debug.Log(eDamage);
+        //not enough to break defend
+        if (eDamage - playerController.pDefence <= playerController.pDefence)
         {
             playerController.pDefence -= eDamage;
             playerController.defenceMeter.UpdateMeter(playerController.pDefence, playerController.pMaxDefence);
-
         }
-        else if (playerController.pDefence <= 0)
+        else
         {
-            playerController.pHealth -= eDamage;
+            Debug.Log(-eDamage + playerController.pDefence);
+            playerController.pHealth = playerController.pHealth - eDamage + playerController.pDefence;
+            playerController.pDefence = 0;
+            playerController.defenceMeter.UpdateMeter(playerController.pDefence, playerController.pMaxDefence);
             playerController.healthMeter.UpdateMeter(playerController.pHealth, playerController.pMaxHealth);
         }
 
     }
     public void Special()
     {
-        Damage();
-        if (playerController.pDefence > 0)
-        {
-            playerController.pDefence -= eDamage;
-            playerController.defenceMeter.UpdateMeter(playerController.pDefence, playerController.pMaxDefence);
-
-        }
-        else if (playerController.pDefence <= 0)
-        {
-            playerController.pHealth -= eDamage;
-            playerController.healthMeter.UpdateMeter(playerController.pHealth, playerController.pMaxHealth);
-        }
+        Attack();
+        Debug.Log(eDamage);
         enemyGenerator.eHealth += 10;
         enemyGenerator.ehealthMeter.UpdateMeter(enemyGenerator.eHealth, enemyGenerator.eMaxHealth);
     }

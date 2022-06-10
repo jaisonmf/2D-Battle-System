@@ -9,6 +9,7 @@ public class playerController : MonoBehaviour
     public gameController gameControl;
     public enemyGenerator enemyGenerator;
     public enemyController enemyController;
+    public selectEnemy selectEnemy;
 
 
     //Sliders
@@ -20,7 +21,7 @@ public class playerController : MonoBehaviour
     public Text healthNum;
     public Text defenceNum;
     public bool selecting = false;
-    //public GameObject selectMenu;
+    public GameObject selectMenu;
     public GameObject damageOutput;
 
     //Stats
@@ -90,15 +91,7 @@ public class playerController : MonoBehaviour
         energyCount.text = energy.ToString();
         healthNum.text = pHealth.ToString() + "/" + pMaxHealth.ToString();
         defenceNum.text = pDefence.ToString() + "/" + pMaxDefence.ToString();
-        /*if(selecting == true)
-        {
-            selectMenu.SetActive(true);
-        }
-        else
-        {
-            selectMenu.SetActive(false);
-        }
-        */
+        
         heal.interactable = true;
         attack.interactable = true;
         defend.interactable = true;
@@ -172,14 +165,6 @@ public class playerController : MonoBehaviour
         if (energy < 2 || pDefence == 50 || selecting == true)
         {
             defend.interactable=false;
-        }
-    }
-
-    public void SelectEnemy(int OnPress)
-    {
-        if (OnPress == 1)
-        {
-            Attack();
         }
     }
 

@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{BF82491D-FF81-4A8C-1AB0-5670B936D436}</ProjectGuid>
+    <ProjectGuid>{52992821-7055-9120-0946-58207C8F21A1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -55,10 +55,11 @@
   <ItemGroup>
     <Compile Include="Assets\Script\propertyMeter.cs" />
     <Compile Include="Assets\Script\enemyGenerator.cs" />
+    <Compile Include="Assets\Script\winScreen.cs" />
     <Compile Include="Assets\Script\gameController.cs" />
     <Compile Include="Assets\Script\playerController.cs" />
     <Compile Include="Assets\Script\enemyController.cs" />
-    <Compile Include="Assets\Script\winScreen.cs" />
+    <Compile Include="Assets\Script\selectEnemy.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

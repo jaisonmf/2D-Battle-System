@@ -13,10 +13,11 @@ public class enemyController : MonoBehaviour
 
     public GameObject enemy;
     public GameObject enemyBars;
-    public Button select; 
+    public GameObject selection;
 
     public propertyMeter ehealthMeter;
     public propertyMeter edefenceMeter;
+
 
     private int Action;
 
@@ -40,6 +41,15 @@ public class enemyController : MonoBehaviour
         if(eHealth >= eMaxHealth)
         {
             eHealth = eMaxHealth;
+        }
+
+        if (gameController.enemyTurn == false)
+        {
+            selection.SetActive(true);
+        }
+        else if (gameController.enemyTurn == true)
+        {
+            selection.SetActive(false);
         }
     }
 
@@ -162,6 +172,7 @@ public class enemyController : MonoBehaviour
         enemyGenerator.Aggression();
         isCoroutineOn = false;
     }
+
 
 
 }

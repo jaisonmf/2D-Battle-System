@@ -439,7 +439,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 245226854}
-  - component: {fileID: 245226853}
   m_Layer: 0
   m_Name: gameControl
   m_TagString: Untagged
@@ -447,26 +446,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &245226853
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 245226852}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85f68ef339ac9ec4b8f3fb7afd3f78eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyTurn: 1
-  gameStart: 0
-  enemyController: {fileID: 6177071861860799988}
-  playerController: {fileID: 592019421}
-  enemyGenerator: {fileID: 5368971236970148028}
-  turnCounter: {fileID: 1813033254}
-  turnCount: 0
-  instructions: {fileID: 958144314}
 --- !u!4 &245226854
 Transform:
   m_ObjectHideFlags: 0
@@ -479,7 +458,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &290495094
 RectTransform:
@@ -872,15 +851,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1163d8aeab2e0f4409a78f8ce9b68e6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameControl: {fileID: 0}
+  gameControl: {fileID: 5368971236970148029}
   enemyGenerator: {fileID: 5368971236970148028}
   enemyController: {fileID: 6177071861860799988}
+  selectEnemy: {fileID: 2121240035}
   healthMeter: {fileID: 2124227854}
   defenceMeter: {fileID: 852440031}
   menu: {fileID: 1278437413}
   healthNum: {fileID: 1903605838}
   defenceNum: {fileID: 1178136798}
   selecting: 0
+  selectMenu: {fileID: 2121240030}
   damageOutput: {fileID: 1263658520}
   pMaxHealth: 100
   pHealth: 0
@@ -1055,7 +1036,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &626812448
 GameObject:
@@ -2633,7 +2614,7 @@ GameObject:
   - component: {fileID: 1334722775}
   - component: {fileID: 1334722774}
   m_Layer: 5
-  m_Name: Action4
+  m_Name: End Turn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3435,7 +3416,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1781146404
 GameObject:
@@ -4410,7 +4391,7 @@ RectTransform:
   - {fileID: 1887380989}
   - {fileID: 1555709529}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4799,6 +4780,7 @@ GameObject:
   - component: {fileID: 2121240033}
   - component: {fileID: 2121240032}
   - component: {fileID: 2121240031}
+  - component: {fileID: 2121240035}
   m_Layer: 5
   m_Name: selection
   m_TagString: selectionMenu
@@ -4850,14 +4832,14 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: enemyController, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 2121240035}
+        m_TargetAssemblyTypeName: selectEnemy, Assembly-CSharp
+        m_MethodName: Select
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4920,6 +4902,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -222.2}
   m_SizeDelta: {x: 160, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2121240035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121240030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f8d94721a8e39a46b19f5e055a01c50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyController: {fileID: 6177071861860799988}
+  playerController: {fileID: 592019421}
+  selection: {fileID: 2121240031}
+  selectButton: {fileID: 2121240030}
+  selectedEnemy: {fileID: 5368971236970148027}
 --- !u!1 &2124227852
 GameObject:
   m_ObjectHideFlags: 0
@@ -5108,6 +5107,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 290495094}
+  - component: {fileID: 5368971236970148029}
   - component: {fileID: 6177071861860799988}
   - component: {fileID: 5368971236970148028}
   m_Layer: 5
@@ -5129,12 +5129,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e43a65a92ec69374f8d70e744467d84a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameController: {fileID: 0}
-  enemyController: {fileID: 5368971236970148028}
+  gameController: {fileID: 5368971236970148029}
+  enemyController: {fileID: 6177071861860799988}
   amount: 0
   goblin: {fileID: 5368971236970148027}
   go: {fileID: 5368971236970148027}
   Parent: {fileID: 9025325843399439172}
+--- !u!114 &5368971236970148029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5368971236970148027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85f68ef339ac9ec4b8f3fb7afd3f78eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyTurn: 1
+  gameStart: 0
+  generated: 0
+  enemyController: {fileID: 6177071861860799988}
+  playerController: {fileID: 592019421}
+  enemyGenerator: {fileID: 5368971236970148028}
+  turnCounter: {fileID: 1813033254}
+  turnCount: 0
+  instructions: {fileID: 958144314}
 --- !u!114 &6177071861860799988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5147,13 +5168,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45132670eca33cc4c964b5276c7c22ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameController: {fileID: 0}
+  gameController: {fileID: 5368971236970148029}
   enemyGenerator: {fileID: 5368971236970148028}
   playerController: {fileID: 592019421}
   winScreen: {fileID: 1758906742}
   enemy: {fileID: 5368971236970148027}
   enemyBars: {fileID: 5368971236970148027}
-  select: {fileID: 2121240031}
+  selection: {fileID: 2121240030}
   ehealthMeter: {fileID: 2109230269}
   edefenceMeter: {fileID: 485525236}
   eDamage: 0

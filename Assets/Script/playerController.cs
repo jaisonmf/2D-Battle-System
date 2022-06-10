@@ -8,6 +8,7 @@ public class playerController : MonoBehaviour
     //Call scripts
     public gameController gameControl;
     public enemyGenerator enemyGenerator;
+    public enemyController enemyController;
 
 
     //Sliders
@@ -18,8 +19,9 @@ public class playerController : MonoBehaviour
     public GameObject menu;
     public Text healthNum;
     public Text defenceNum;
-    public GameObject selectMenu;
     public bool selecting = false;
+    public GameObject selectMenu;
+    public GameObject damageOutput;
 
     //Stats
     public int pMaxHealth = 100;
@@ -84,6 +86,7 @@ public class playerController : MonoBehaviour
     }
     public void PlayerStart()
     {
+        selectMenu = GameObject.FindWithTag("selectionMenu");
         menu.SetActive(true);
         energyCount.text = energy.ToString();
         healthNum.text = pHealth.ToString() + "/" + pMaxHealth.ToString();
@@ -135,19 +138,20 @@ public class playerController : MonoBehaviour
     public void Attack()
     {
         Damage();
-        if (pDamage - enemyGenerator.eDefence <= enemyGenerator.eDefence)
+        if (pDamage - enemyController.eDefence <= enemyController.eDefence)
         {
-            enemyGenerator.eDefence -= pDamage;
-            enemyGenerator.edefenceMeter.UpdateMeter(enemyGenerator.eDefence, enemyGenerator.eMaxDefence);
+            enemyController.eDefence -= pDamage;
+            enemyController.edefenceMeter.UpdateMeter(enemyController.eDefence, enemyController.eMaxDefence);
         }
         //breaks defence + goes into health. Also if player has no defence
         else
         {
-            enemyGenerator.eHealth = enemyGenerator.eHealth - pDamage + enemyGenerator.eDefence;
-            enemyGenerator.eDefence = 0;
-            enemyGenerator.edefenceMeter.UpdateMeter(enemyGenerator.eDefence, enemyGenerator.eMaxDefence);
-            enemyGenerator.ehealthMeter.UpdateMeter(enemyGenerator.eHealth, enemyGenerator.eMaxHealth);
+            enemyController.eHealth = enemyController.eHealth - pDamage + enemyController.eDefence;
+            enemyController.eDefence = 0;
+            defenceMeter.UpdateMeter(enemyController.eDefence, enemyController.eMaxDefence);
+            enemyController.ehealthMeter.UpdateMeter(enemyController.eHealth, enemyController.eMaxHealth);
         }
+        damageOutput.SetActive(true);
         damageText.text = pDamage.ToString();
         damageAnim.Play("damage");
         selecting = false;

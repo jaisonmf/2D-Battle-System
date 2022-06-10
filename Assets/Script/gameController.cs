@@ -29,8 +29,8 @@ public class gameController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            gameStart = true;
             enemyGenerator.EnemyGeneration();
+            gameStart = true;
             enemyTurn = false;
         }
 

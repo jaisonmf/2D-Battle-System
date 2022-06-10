@@ -13,34 +13,45 @@ public class enemyController : MonoBehaviour
 
     public GameObject enemy;
     public GameObject enemyBars;
-    
+
+    public propertyMeter ehealthMeter;
+    public propertyMeter edefenceMeter;
+
     private int Action;
 
     public int eDamage;
 
     private bool isCoroutineOn;
 
+    public int eMaxHealth;
+    public int eHealth;
+    public int eMaxDamage;
+    public int eMinDamage;
+    public int eDefence;
+    public int eMaxDefence = 50;
+
     private void Update()
     {
-        if (enemyGenerator.eDefence >= enemyGenerator.eMaxDefence)
+        if (eDefence >= eMaxDefence)
         {
-            enemyGenerator.eDefence = enemyGenerator.eMaxDefence;
+            eDefence = eMaxDefence;
         }
-        if(enemyGenerator.eHealth >= enemyGenerator.eMaxHealth)
+        if(eHealth >= eMaxHealth)
         {
-            enemyGenerator.eHealth = enemyGenerator.eMaxHealth;
+            eHealth = eMaxHealth;
         }
-        if(enemyGenerator.eHealth <= 0)
+       /* if(eHealth <= 0)
         {
             enemy.SetActive(false);
             enemyBars.SetActive(false);
             //winScreen.Victory(true);
         }
+       */
     }
 
     private void Damage()
     {
-        eDamage = Random.Range(enemyGenerator.eMaxDamage, enemyGenerator.eLowDamage);
+        eDamage = Random.Range(eMaxDamage, eMinDamage);
     }
 
     public void EnemyStart()
@@ -51,7 +62,7 @@ public class enemyController : MonoBehaviour
     public void EnemyGo()
     {
         //Above 75%
-        if(enemyGenerator.eHealth > enemyGenerator.eMaxHealth * 0.75)
+        if(eHealth > eMaxHealth * 0.75)
         {
             Action = Random.Range(1, 7);
             
@@ -69,7 +80,7 @@ public class enemyController : MonoBehaviour
             }
         }
         //Above 25%
-        else if (enemyGenerator.eHealth > enemyGenerator.eMaxHealth * 0.25)
+        else if (eHealth > eMaxHealth * 0.25)
         {
             Action = Random.Range(1, 4);
             if (Action == 1)
@@ -128,14 +139,14 @@ public class enemyController : MonoBehaviour
     {
         Attack();
         Debug.Log(eDamage);
-        enemyGenerator.eHealth += 10;
-        enemyGenerator.ehealthMeter.UpdateMeter(enemyGenerator.eHealth, enemyGenerator.eMaxHealth);
+        eHealth += 10;
+        ehealthMeter.UpdateMeter(eHealth, eMaxHealth);
     }
 
     public void Defend()
     {
-        enemyGenerator.eDefence += 10;
-        enemyGenerator.edefenceMeter.UpdateMeter(enemyGenerator.eDefence, enemyGenerator.eMaxDefence);
+        eDefence += 10;
+        edefenceMeter.UpdateMeter(eDefence, eMaxDefence);
     }
 
 

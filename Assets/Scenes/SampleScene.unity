@@ -463,7 +463,7 @@ MonoBehaviour:
   gameStart: 0
   enemyController: {fileID: 6177071861860799988}
   playerController: {fileID: 592019421}
-  enemyGenerator: {fileID: 0}
+  enemyGenerator: {fileID: 5368971236970148028}
   turnCounter: {fileID: 1813033254}
   turnCount: 0
   instructions: {fileID: 958144314}
@@ -502,7 +502,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 329, y: 0}
+  m_AnchoredPosition: {x: -780, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &485525235
@@ -688,8 +688,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1919399813}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -882,6 +881,7 @@ MonoBehaviour:
   defenceNum: {fileID: 1178136798}
   selectMenu: {fileID: 2121240030}
   selecting: 0
+  damageOutput: {fileID: 1263658520}
   pMaxHealth: 100
   pHealth: 0
   pDamage: 0
@@ -2491,7 +2491,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &1263658521
 Animator:
   serializedVersion: 3
@@ -4409,8 +4409,8 @@ RectTransform:
   - {fileID: 565484957}
   - {fileID: 1887380989}
   - {fileID: 1555709529}
-  m_Father: {fileID: 519420032}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4805,7 +4805,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2121240031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5118,11 +5118,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameController: {fileID: 245226853}
-  enemyController: {fileID: 0}
+  enemyController: {fileID: 5368971236970148028}
   amount: 0
   goblin: {fileID: 5368971236970148027}
-  go: {fileID: 0}
-  canvas: {fileID: 0}
+  go: {fileID: 5368971236970148027}
+  Parent: {fileID: 9025325843399439172}
   eHealth: 0
   eMaxHealth: 0
   eMaxDamage: 0
@@ -5144,7 +5144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameController: {fileID: 245226853}
-  enemyGenerator: {fileID: 0}
+  enemyGenerator: {fileID: 5368971236970148028}
   playerController: {fileID: 592019421}
   winScreen: {fileID: 1758906742}
   enemy: {fileID: 5368971236970148027}

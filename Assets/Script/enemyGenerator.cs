@@ -5,12 +5,13 @@ using UnityEngine;
 public class enemyGenerator : MonoBehaviour
 {
     public gameController gameController;
-    public enemyGenerator enemyController;
+    public enemyController enemyController;
 
     public int amount;
     public GameObject goblin;
     public GameObject go;
     public GameObject Parent;
+
 
     private List<GameObject> list = new List<GameObject>();
 
@@ -24,6 +25,7 @@ public class enemyGenerator : MonoBehaviour
                 go.transform.SetParent(Parent.transform, false);
                 list.Add(go);
                 EnemyStats();
+
             }
             
         }

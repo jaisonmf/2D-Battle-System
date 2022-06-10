@@ -13,6 +13,7 @@ public class enemyController : MonoBehaviour
 
     public GameObject enemy;
     public GameObject enemyBars;
+    public Button select; 
 
     public propertyMeter ehealthMeter;
     public propertyMeter edefenceMeter;
@@ -40,13 +41,6 @@ public class enemyController : MonoBehaviour
         {
             eHealth = eMaxHealth;
         }
-       /* if(eHealth <= 0)
-        {
-            enemy.SetActive(false);
-            enemyBars.SetActive(false);
-            //winScreen.Victory(true);
-        }
-       */
     }
 
     private void Damage()
@@ -61,13 +55,14 @@ public class enemyController : MonoBehaviour
 
     public void EnemyGo()
     {
+        Action = Random.Range(1, 7);
+        Debug.Log(Action);
         //Above 75%
-        if(eHealth > eMaxHealth * 0.75)
+        if (eHealth > eMaxHealth * 0.75)
         {
-            Action = Random.Range(1, 7);
-            
-            if(Action <= 3)
+            if (Action <= 3)
             {
+                Debug.Log("dam,n");
                 Attack();
             }
             else if (Action <= 5)
@@ -82,12 +77,11 @@ public class enemyController : MonoBehaviour
         //Above 25%
         else if (eHealth > eMaxHealth * 0.25)
         {
-            Action = Random.Range(1, 4);
-            if (Action == 1)
+            if (Action == 1 || Action == 2 || Action == 3)
             {
                 Attack();
             }
-            else if (Action == 2)
+            else if (Action == 4 || Action == 5)
             {
                 Defend();
             }
@@ -97,7 +91,6 @@ public class enemyController : MonoBehaviour
         //Lower than 25%
         else
         {
-            Action = Random.Range(1, 7);
             if (Action <= 4)
             {
                 Defend();
@@ -108,6 +101,7 @@ public class enemyController : MonoBehaviour
             }
             else if (Action == 6)
             {
+                Debug.Log("why are you here");
                 Attack();
             }
         }
@@ -138,7 +132,6 @@ public class enemyController : MonoBehaviour
     public void Special()
     {
         Attack();
-        Debug.Log(eDamage);
         eHealth += 10;
         ehealthMeter.UpdateMeter(eHealth, eMaxHealth);
     }
@@ -154,9 +147,9 @@ public class enemyController : MonoBehaviour
     {
         if (isCoroutineOn)
             yield break;
-
+        
         isCoroutineOn = true;
-
+        
         yield return new WaitForSeconds(time);
         EnemyGo();
 
@@ -169,7 +162,6 @@ public class enemyController : MonoBehaviour
         enemyGenerator.Aggression();
         isCoroutineOn = false;
     }
-
 
 
 }

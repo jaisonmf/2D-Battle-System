@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 public class gameController : MonoBehaviour
 {
-    public bool enemyTurn;
+    public bool enemyTurn = false;
     public bool gameStart = false;
+    public bool generated = false;
 
     public enemyController enemyController;
     public playerController playerController;
@@ -27,11 +28,11 @@ public class gameController : MonoBehaviour
     }
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && generated == false)
         {
             enemyGenerator.EnemyGeneration();
             gameStart = true;
-            enemyTurn = false;
+            generated = true;
         }
 
         if (enemyTurn == true && gameStart == true)
@@ -41,6 +42,7 @@ public class gameController : MonoBehaviour
 
         if (enemyTurn == false && gameStart == true)
         {
+            gameStart = true;
             playerController.PlayerStart();
             instructions.text = ("Select your move");
 

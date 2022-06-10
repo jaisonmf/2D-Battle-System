@@ -20,7 +20,7 @@ public class playerController : MonoBehaviour
     public Text healthNum;
     public Text defenceNum;
     public bool selecting = false;
-    public GameObject selectMenu;
+    //public GameObject selectMenu;
     public GameObject damageOutput;
 
     //Stats
@@ -86,19 +86,19 @@ public class playerController : MonoBehaviour
     }
     public void PlayerStart()
     {
-        selectMenu = GameObject.FindWithTag("selectionMenu");
         menu.SetActive(true);
         energyCount.text = energy.ToString();
         healthNum.text = pHealth.ToString() + "/" + pMaxHealth.ToString();
         defenceNum.text = pDefence.ToString() + "/" + pMaxDefence.ToString();
-        if(selecting == false)
-        {
-            selectMenu.SetActive(false);
-        }
-        else
+        /*if(selecting == true)
         {
             selectMenu.SetActive(true);
         }
+        else
+        {
+            selectMenu.SetActive(false);
+        }
+        */
         heal.interactable = true;
         attack.interactable = true;
         defend.interactable = true;
@@ -131,6 +131,7 @@ public class playerController : MonoBehaviour
         {
             gameControl.enemyTurn = true;
             menu.SetActive(false);
+            
         }
     }
 
@@ -181,4 +182,6 @@ public class playerController : MonoBehaviour
             Attack();
         }
     }
+
+
 }

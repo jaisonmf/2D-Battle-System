@@ -7,6 +7,11 @@ public class enemyGenerator : MonoBehaviour
     public gameController gameController;
     public enemyGenerator enemyController;
 
+    public int amount;
+    public GameObject goblin;
+    public GameObject go;
+    public GameObject canvas;
+
     //Health
     public int eHealth;
     public int eMaxHealth;
@@ -23,7 +28,21 @@ public class enemyGenerator : MonoBehaviour
     public propertyMeter ehealthMeter;
     public propertyMeter edefenceMeter;
 
-    void Start()
+    public void EnemyGeneration()
+    {
+        for (amount = Random.Range(0, 6); amount < 0; amount++)
+        {
+            go = Instantiate(goblin, new Vector3(amount * 10, 0, 1), Quaternion.identity);
+            Debug.Log(amount);
+            goblin.SetActive(true);
+            go.transform.parent = canvas.transform;
+            EnemyStats();
+        }
+    }
+    
+    
+    
+    public void EnemyStats()
     {
         //Calculates states
         eMaxHealth = Random.Range(50, 100);

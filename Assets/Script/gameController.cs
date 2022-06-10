@@ -10,6 +10,7 @@ public class gameController : MonoBehaviour
 
     public enemyController enemyController;
     public playerController playerController;
+    public enemyGenerator enemyGenerator;
 
     public Text turnCounter;
     public int turnCount = 0;
@@ -29,6 +30,7 @@ public class gameController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             gameStart = true;
+            enemyGenerator.EnemyGeneration();
             enemyTurn = false;
         }
 

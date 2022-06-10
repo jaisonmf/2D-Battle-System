@@ -18,6 +18,8 @@ public class playerController : MonoBehaviour
     public GameObject menu;
     public Text healthNum;
     public Text defenceNum;
+    public GameObject selectMenu;
+    public bool selecting = false;
 
     //Stats
     public int pMaxHealth = 100;
@@ -86,15 +88,25 @@ public class playerController : MonoBehaviour
         energyCount.text = energy.ToString();
         healthNum.text = pHealth.ToString() + "/" + pMaxHealth.ToString();
         defenceNum.text = pDefence.ToString() + "/" + pMaxDefence.ToString();
+        if(selecting == false)
+        {
+            selectMenu.SetActive(false);
+        }
+        else
+        {
+            selectMenu.SetActive(true);
+        }
+        heal.interactable = true;
+        attack.interactable = true;
+        defend.interactable = true;
     }
 
     public void PlayerGo(int ButtonPress)
     {
         if (ButtonPress == 1 && energy >= 1)
         {
+            selecting = true;
             energy -= 1;
-            Attack();
-            
         }
         if (ButtonPress == 2 && energy >= 2 && pHealth < 100)
         {
@@ -123,39 +135,46 @@ public class playerController : MonoBehaviour
     public void Attack()
     {
         Damage();
-        if (enemyGenerator.eDefence > 0)
+        if (pDamage - enemyGenerator.eDefence <= enemyGenerator.eDefence)
         {
             enemyGenerator.eDefence -= pDamage;
             enemyGenerator.edefenceMeter.UpdateMeter(enemyGenerator.eDefence, enemyGenerator.eMaxDefence);
         }
-        else if (enemyGenerator.eDefence <= 0)
+        //breaks defence + goes into health. Also if player has no defence
+        else
         {
-            enemyGenerator.eHealth -= pDamage;
+            enemyGenerator.eHealth = enemyGenerator.eHealth - pDamage + enemyGenerator.eDefence;
+            enemyGenerator.eDefence = 0;
+            enemyGenerator.edefenceMeter.UpdateMeter(enemyGenerator.eDefence, enemyGenerator.eMaxDefence);
             enemyGenerator.ehealthMeter.UpdateMeter(enemyGenerator.eHealth, enemyGenerator.eMaxHealth);
         }
         damageText.text = pDamage.ToString();
         damageAnim.Play("damage");
+        selecting = false;
+
     }
 
     private void Buttons()
     {
-      if (energy < 1)
+        if (energy == 0 || selecting == true)
         {
             attack.interactable = false;
         }
-      if (energy < 2 || pHealth == 100)
+        if (energy < 2 || pHealth == 100 || selecting == true)
         {
             heal.interactable = false;
         }
-      if (energy < 2 || pDefence == 50)
+        if (energy < 2 || pDefence == 50 || selecting == true)
         {
             defend.interactable=false;
         }
-        else
+    }
+
+    public void SelectEnemy(int OnPress)
+    {
+        if (OnPress == 1)
         {
-            heal.interactable = true;
-            attack.interactable = true;
-            defend.interactable = true;
+            Attack();
         }
     }
 }

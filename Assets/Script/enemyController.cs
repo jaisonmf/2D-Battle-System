@@ -34,7 +34,7 @@ public class enemyController : MonoBehaviour
         {
             enemy.SetActive(false);
             enemyBars.SetActive(false);
-            winScreen.Victory();
+            //winScreen.Victory(true);
         }
     }
 
@@ -114,9 +114,9 @@ public class enemyController : MonoBehaviour
             playerController.pDefence -= eDamage;
             playerController.defenceMeter.UpdateMeter(playerController.pDefence, playerController.pMaxDefence);
         }
+        //breaks defence + goes into health. Also if player has no defence
         else
         {
-            Debug.Log(-eDamage + playerController.pDefence);
             playerController.pHealth = playerController.pHealth - eDamage + playerController.pDefence;
             playerController.pDefence = 0;
             playerController.defenceMeter.UpdateMeter(playerController.pDefence, playerController.pMaxDefence);

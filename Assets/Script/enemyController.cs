@@ -64,11 +64,36 @@ public class enemyController : MonoBehaviour
         eDamage = Random.Range(eMaxDamage, eMinDamage);
     }
 
-    //Enemy delay on turn
+    //Enemy delay on turn + Enemy turn start
     public void EnemyStart()
     {
+        playerController.end.interactable = false;
+        playerController.defend.interactable = false;
+        playerController.attack.interactable = false;
+        playerController.heal.interactable = false;
         StartCoroutine(Delay(3));
     }
+
+    //Enemy takes turn + ends turns
+    IEnumerator Delay(float time)
+    {
+        if (isCoroutineOn)
+            yield break;
+
+        isCoroutineOn = true;
+
+        yield return new WaitForSeconds(time);
+        EnemyGo();
+
+        ehealthMeter.UpdateMeter(eHealth, eMaxHealth);
+        edefenceMeter.UpdateMeter(eDefence, eMaxDefence);
+        gameController.PlayerTurn();
+        playerController.energy = 5;
+        playerController.energyCount.text = playerController.energy.ToString();
+        isCoroutineOn = false;
+    }
+
+
 
     //Enemy behaviour
     public void EnemyGo()
@@ -151,6 +176,7 @@ public class enemyController : MonoBehaviour
         }
 
     }
+    //Enemy 'special move'
     public void Special()
     {
         Attack();
@@ -158,6 +184,7 @@ public class enemyController : MonoBehaviour
         ehealthMeter.UpdateMeter(eHealth, eMaxHealth);
     }
 
+    //Enemy defend
     public void Defend()
     {
         enemy.GetComponent<enemyController>().eDefence += 10;
@@ -165,24 +192,6 @@ public class enemyController : MonoBehaviour
     }
 
 
-    IEnumerator Delay(float time)
-    {
-        if (isCoroutineOn)
-            yield break;
-        
-        isCoroutineOn = true;
-        
-        yield return new WaitForSeconds(time);
-        EnemyGo();
-
-        ehealthMeter.UpdateMeter(eHealth, eMaxHealth);
-        edefenceMeter.UpdateMeter(eDefence, eMaxDefence);
-        gameController.PlayerTurn();
-        playerController.energy = 5;
-        playerController.energyCount.text = playerController.energy.ToString();
-        isCoroutineOn = false;
-    }
-
-
+   
 
 }

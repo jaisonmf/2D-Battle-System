@@ -101,13 +101,14 @@ public class playerController : MonoBehaviour
     //Player turn
     public void PlayerGo(int ButtonPress)
     {
+        //Attack
         if (ButtonPress == 1 && energy >= 1)
         {
             selecting = true;
             energy -= 1;
 
         }
-        
+        //Heal
         if (ButtonPress == 2 && energy >= 2 && pHealth < 100)
         {
             pHealth += 10;
@@ -117,7 +118,7 @@ public class playerController : MonoBehaviour
             energy -= 2;
             PlayerStart();
         }
-        
+        //Defend
         if(ButtonPress == 3 && energy >= 2 && pDefence < 50)
         {
             pDefence += 15;
@@ -127,7 +128,7 @@ public class playerController : MonoBehaviour
             energy -= 2;
             PlayerStart();
         }
-        
+        //End Turn
         if (ButtonPress == 4)
         {
             gameControl.EnemyTurn();

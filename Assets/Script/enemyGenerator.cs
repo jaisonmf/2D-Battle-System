@@ -18,7 +18,7 @@ public class enemyGenerator : MonoBehaviour
 
     public void EnemyGeneration()
     {
-        amount = Random.Range(2, 10);
+        amount = Random.Range(2, 11);
         {
             for(int i = 0; i < amount; i++)
             {

@@ -23,7 +23,7 @@ public class gameController : MonoBehaviour
     private void Start()
     {
         enemyTurn = false;
-        turnCount = 0;  
+        turnCount = 0;
         playerController.menu.SetActive(false);
         turnCounter.text = "Turn: " + turnCount;
         instructions.text = ("You have been attacked!\nPress 'E' to continue");
@@ -40,6 +40,7 @@ public class gameController : MonoBehaviour
             gameStart = true;
             generated = true;
             PlayerTurn();
+            turnCount++;
         }
 
     }

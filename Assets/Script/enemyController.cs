@@ -17,6 +17,9 @@ public class enemyController : MonoBehaviour
     public GameObject selection;
     public propertyMeter ehealthMeter;
     public propertyMeter edefenceMeter;
+    public Text damageText;
+    public GameObject damageOutput;
+    public Animator damageAnim;
 
     //Delay
     private bool isCoroutineOn;

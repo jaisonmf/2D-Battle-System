@@ -21,7 +21,6 @@ public class playerController : MonoBehaviour
     public Text defenceNum;
     public bool selecting = false;
     public GameObject selectMenu;
-    public GameObject damageOutput;
 
     //Stats
     public int pMaxHealth = 100;
@@ -43,10 +42,8 @@ public class playerController : MonoBehaviour
     public Button defend;
 
     //Other
-    public Animator damageAnim;
     public Animator healAnim;
     public Animator defendAnim;
-    public Text damageText;
     public Text healText;
     public Text defendText;
 
@@ -108,18 +105,20 @@ public class playerController : MonoBehaviour
         if (ButtonPress == 2 && energy >= 2 && pHealth < 100)
         {
             pHealth += 10;
-            healthMeter.UpdateMeter(pHealth, pMaxHealth);
             healText.text = 10.ToString();
+            healthMeter.UpdateMeter(pHealth, pMaxHealth);
             healAnim.Play("heal");
             energy -= 2;
+            PlayerStart();
         }
         if(ButtonPress == 3 && energy >= 2 && pDefence < 50)
         {
             pDefence += 10;
-            defenceMeter.UpdateMeter(pDefence, pMaxDefence);
             defendText.text = 10.ToString();
+            defenceMeter.UpdateMeter(pDefence, pMaxDefence);
             defendAnim.Play("defend");
             energy -= 2;
+            PlayerStart();
         }
         if (ButtonPress == 4)
         {
@@ -150,12 +149,14 @@ public class playerController : MonoBehaviour
             defenceMeter.UpdateMeter(enemy.GetComponent<enemyController>().eDefence, enemy.GetComponent<enemyController>().eMaxDefence);
             enemy.GetComponent<enemyController>().ehealthMeter.UpdateMeter(enemy.GetComponent<enemyController>().eHealth, enemy.GetComponent<enemyController>().eMaxHealth);
         }
-        damageOutput.SetActive(true);
-        damageText.text = pDamage.ToString();
-        damageAnim.Play("damage");
+        enemy.GetComponent<enemyController>().damageOutput.SetActive(true);
+        enemy.GetComponent<enemyController>().damageText.text = pDamage.ToString();
+        enemy.GetComponent<enemyController>().damageAnim.Play("damage");
         selecting = false;
-
+        PlayerStart();
     }
+
+
 
 
     //Button Avaliability

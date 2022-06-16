@@ -884,7 +884,6 @@ MonoBehaviour:
   defenceNum: {fileID: 1178136798}
   selecting: 0
   selectMenu: {fileID: 2121240030}
-  damageOutput: {fileID: 1263658520}
   pMaxHealth: 100
   pHealth: 0
   pDamage: 0
@@ -895,10 +894,9 @@ MonoBehaviour:
   attack: {fileID: 1882061488}
   heal: {fileID: 2024129534}
   defend: {fileID: 2110491688}
-  damageAnim: {fileID: 1263658521}
+  hitText: 0
   healAnim: {fileID: 1887380990}
   defendAnim: {fileID: 1555709530}
-  damageText: {fileID: 1263658522}
   healText: {fileID: 1887380991}
   defendText: {fileID: 1555709531}
 --- !u!4 &592019422
@@ -2494,7 +2492,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &1263658521
 Animator:
   serializedVersion: 3
@@ -2572,7 +2570,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -410, y: 84}
+  m_AnchoredPosition: {x: -410, y: 1163}
   m_SizeDelta: {x: 70, y: 50}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &1278437413
@@ -5178,6 +5176,9 @@ MonoBehaviour:
   selection: {fileID: 2121240030}
   ehealthMeter: {fileID: 2109230269}
   edefenceMeter: {fileID: 485525236}
+  damageText: {fileID: 1263658522}
+  damageOutput: {fileID: 1263658520}
+  damageAnim: {fileID: 1263658521}
   eMaxHealth: 0
   eHealth: 0
   eMaxDamage: 0

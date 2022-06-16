@@ -50,10 +50,13 @@ public class enemyGenerator : MonoBehaviour
     {
         if (gameController.turnCount > 5 && gameController.aggrovated == true)
         {
-            go.GetComponent<enemyController>().eMaxHealth += 5;
-            go.GetComponent<enemyController>().eMaxDamage += 5;
-            go.GetComponent<enemyController>().eMinDamage += 5;
-            go.GetComponent<enemyController>().eHealth += 5;
+            for (int i = 0;i < list.Count; i++)
+            {
+                list[i].GetComponent<enemyController>().eMaxHealth += 5;
+                list[i].GetComponent<enemyController>().eMaxDamage += 5;
+                list[i].GetComponent<enemyController>().eMinDamage += 5;
+                list[i].GetComponent<enemyController>().eHealth += 5;
+            }
             gameController.aggrovated = false;
         }
     }

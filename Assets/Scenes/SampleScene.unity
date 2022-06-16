@@ -439,6 +439,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 245226854}
+  - component: {fileID: 245226853}
   m_Layer: 0
   m_Name: gameControl
   m_TagString: Untagged
@@ -446,6 +447,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &245226853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245226852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85f68ef339ac9ec4b8f3fb7afd3f78eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyTurn: 1
+  gameStart: 0
+  generated: 0
+  aggrovated: 0
+  enemyController: {fileID: 6177071861860799988}
+  playerController: {fileID: 592019421}
+  enemyGenerator: {fileID: 5368971236970148028}
+  turnCounter: {fileID: 1813033254}
+  turnCount: 0
+  instructions: {fileID: 958144314}
 --- !u!4 &245226854
 Transform:
   m_ObjectHideFlags: 0
@@ -851,9 +874,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1163d8aeab2e0f4409a78f8ce9b68e6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameControl: {fileID: 5368971236970148029}
+  gameControl: {fileID: 245226853}
   enemyGenerator: {fileID: 5368971236970148028}
-  enemyController: {fileID: 6177071861860799988}
   selectEnemy: {fileID: 2121240035}
   healthMeter: {fileID: 2124227854}
   defenceMeter: {fileID: 852440031}
@@ -3034,7 +3056,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 10846.706, y: -59}
+  m_AnchoredPosition: {x: 39.7, y: -51.8}
   m_SizeDelta: {x: 70, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1555709530
@@ -4787,7 +4809,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2121240031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5107,7 +5129,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 290495094}
-  - component: {fileID: 5368971236970148029}
   - component: {fileID: 6177071861860799988}
   - component: {fileID: 5368971236970148028}
   m_Layer: 5
@@ -5129,33 +5150,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e43a65a92ec69374f8d70e744467d84a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameController: {fileID: 5368971236970148029}
+  gameController: {fileID: 245226853}
   enemyController: {fileID: 6177071861860799988}
   amount: 0
   goblin: {fileID: 5368971236970148027}
   go: {fileID: 5368971236970148027}
   Parent: {fileID: 9025325843399439172}
---- !u!114 &5368971236970148029
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5368971236970148027}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85f68ef339ac9ec4b8f3fb7afd3f78eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyTurn: 1
-  gameStart: 0
-  generated: 0
-  enemyController: {fileID: 6177071861860799988}
-  playerController: {fileID: 592019421}
-  enemyGenerator: {fileID: 5368971236970148028}
-  turnCounter: {fileID: 1813033254}
-  turnCount: 0
-  instructions: {fileID: 958144314}
+  list: []
 --- !u!114 &6177071861860799988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5168,7 +5169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45132670eca33cc4c964b5276c7c22ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameController: {fileID: 5368971236970148029}
+  gameController: {fileID: 245226853}
   enemyGenerator: {fileID: 5368971236970148028}
   playerController: {fileID: 592019421}
   winScreen: {fileID: 1758906742}
@@ -5177,13 +5178,14 @@ MonoBehaviour:
   selection: {fileID: 2121240030}
   ehealthMeter: {fileID: 2109230269}
   edefenceMeter: {fileID: 485525236}
-  eDamage: 0
   eMaxHealth: 0
   eHealth: 0
   eMaxDamage: 0
   eMinDamage: 0
   eDefence: 0
   eMaxDefence: 0
+  count: 0
+  eDamage: 0
 --- !u!1 &9025325843399439172
 GameObject:
   m_ObjectHideFlags: 0

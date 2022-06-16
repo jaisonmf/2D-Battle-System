@@ -11,27 +11,29 @@ public class enemyController : MonoBehaviour
     public playerController playerController;
     public winScreen winScreen;
 
+    //Enemy GUI
     public GameObject enemy;
     public GameObject enemyBars;
     public GameObject selection;
-
     public propertyMeter ehealthMeter;
     public propertyMeter edefenceMeter;
 
-
-    private int Action;
-
-    public int eDamage;
-
+    //Delay
     private bool isCoroutineOn;
 
+    //Stats
     public int eMaxHealth;
     public int eHealth;
     public int eMaxDamage;
     public int eMinDamage;
     public int eDefence;
-    public int eMaxDefence = 50;
+    public int eMaxDefence;
+    public int count;
+    private int Action;
+    public int eDamage;
 
+
+    //Certain stats cannot go over a certain threshold
     private void Update()
     {
         if (eDefence >= eMaxDefence)
@@ -53,26 +55,27 @@ public class enemyController : MonoBehaviour
         }
     }
 
+    //Damage calculation
     private void Damage()
     {
         eDamage = Random.Range(eMaxDamage, eMinDamage);
     }
 
+    //Enemy delay on turn
     public void EnemyStart()
     {
         StartCoroutine(Delay(3));
     }
 
+    //Enemy behaviour
     public void EnemyGo()
     {
         Action = Random.Range(1, 7);
-        Debug.Log(Action);
         //Above 75%
-        if (eHealth > eMaxHealth * 0.75)
+        if (enemy.GetComponent<enemyController>().eHealth > enemy.GetComponent<enemyController>().eMaxHealth * 0.75)
         {
             if (Action <= 3)
             {
-                Debug.Log("dam,n");
                 Attack();
             }
             else if (Action <= 5)
@@ -85,7 +88,7 @@ public class enemyController : MonoBehaviour
             }
         }
         //Above 25%
-        else if (eHealth > eMaxHealth * 0.25)
+        else if (enemy.GetComponent<enemyController>().eHealth > enemy.GetComponent<enemyController>().eMaxHealth * 0.25)
         {
             if (Action == 1 || Action == 2 || Action == 3)
             {
@@ -111,28 +114,27 @@ public class enemyController : MonoBehaviour
             }
             else if (Action == 6)
             {
-                Debug.Log("why are you here");
                 Attack();
             }
         }
 
     }
 
-
+    //Enemy attack against player
     public void Attack()
     {
         Damage();
         Debug.Log(eDamage);
         //not enough to break defend
-        if (eDamage - playerController.pDefence <= playerController.pDefence)
+        if (enemy.GetComponent<enemyController>().eDamage - playerController.pDefence <= playerController.pDefence)
         {
-            playerController.pDefence -= eDamage;
+            playerController.pDefence -= enemy.GetComponent<enemyController>().eDamage;
             playerController.defenceMeter.UpdateMeter(playerController.pDefence, playerController.pMaxDefence);
         }
         //breaks defence + goes into health. Also if player has no defence
         else
         {
-            playerController.pHealth = playerController.pHealth - eDamage + playerController.pDefence;
+            playerController.pHealth = playerController.pHealth - enemy.GetComponent<enemyController>().eDamage + playerController.pDefence;
             playerController.pDefence = 0;
             playerController.defenceMeter.UpdateMeter(playerController.pDefence, playerController.pMaxDefence);
             playerController.healthMeter.UpdateMeter(playerController.pHealth, playerController.pMaxHealth);
@@ -142,13 +144,13 @@ public class enemyController : MonoBehaviour
     public void Special()
     {
         Attack();
-        eHealth += 10;
+        enemy.GetComponent<enemyController>().eHealth += 10;
         ehealthMeter.UpdateMeter(eHealth, eMaxHealth);
     }
 
     public void Defend()
     {
-        eDefence += 10;
+        enemy.GetComponent<enemyController>().eDefence += 10;
         edefenceMeter.UpdateMeter(eDefence, eMaxDefence);
     }
 
@@ -163,13 +165,10 @@ public class enemyController : MonoBehaviour
         yield return new WaitForSeconds(time);
         EnemyGo();
 
-        gameController.enemyTurn = false;
+        gameController.PlayerTurn();
         playerController.energy = 5;
-        gameController.turnCount += 1;
-        gameController.turnCounter.text = "Turn: " + gameController.turnCount;
         playerController.healthNum.text = playerController.pHealth.ToString() + "/" + playerController.pMaxHealth.ToString();
         playerController.defenceNum.text = playerController.pDefence.ToString() + "/" + playerController.pMaxDefence.ToString();
-        enemyGenerator.Aggression();
         isCoroutineOn = false;
     }
 

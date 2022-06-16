@@ -14,7 +14,7 @@ public class enemyGenerator : MonoBehaviour
     public GameObject Parent;
 
 
-    private List<GameObject> list = new List<GameObject>();
+    public List<GameObject> list = new List<GameObject>();
 
     public void EnemyGeneration()
     {
@@ -26,9 +26,10 @@ public class enemyGenerator : MonoBehaviour
                 go.transform.SetParent(Parent.transform, false);
                 list.Add(go);
                 EnemyStats();
+                go.GetComponent<enemyController>().count = i;
 
             }
-            
+
         }
     }
 
@@ -41,17 +42,19 @@ public class enemyGenerator : MonoBehaviour
         go.GetComponent<enemyController>().eMaxDamage = Random.Range(10, 15);
         go.GetComponent<enemyController>().eMinDamage = Random.Range(5, 10);
         go.GetComponent<enemyController>().eHealth = go.GetComponent<enemyController>().eMaxHealth;
+        go.GetComponent<enemyController>().eMaxDefence = 50;
 
     }
 
     public void Aggression()
     {
-        if (gameController.turnCount > 5)
+        if (gameController.turnCount > 5 && gameController.aggrovated == true)
         {
             go.GetComponent<enemyController>().eMaxHealth += 5;
             go.GetComponent<enemyController>().eMaxDamage += 5;
             go.GetComponent<enemyController>().eMinDamage += 5;
             go.GetComponent<enemyController>().eHealth += 5;
+            gameController.aggrovated = false;
         }
     }
 

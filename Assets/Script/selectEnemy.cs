@@ -11,9 +11,14 @@ public class selectEnemy : MonoBehaviour
     public GameObject selectButton;
     public GameObject selectedEnemy;
 
+
+    private void Start()
+    {
+        selectButton.SetActive(false);
+    }
     public void Select(int Select)
     {
-        if(Select == 0)
+        if(Select == 0 && playerController.selecting == true)
         {
             Selected();
         }
@@ -24,6 +29,6 @@ public class selectEnemy : MonoBehaviour
 
     void Selected()
     {
-        playerController.Attack();
+        playerController.Attack(this.transform.parent.GetComponent<enemyController>().count);
     }
 }

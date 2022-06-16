@@ -8,7 +8,6 @@ public class playerController : MonoBehaviour
     //Call scripts
     public gameController gameControl;
     public enemyGenerator enemyGenerator;
-    public enemyController enemyController;
     public selectEnemy selectEnemy;
 
 
@@ -56,11 +55,12 @@ public class playerController : MonoBehaviour
         pHealth = pMaxHealth;
     }
 
+    //Damage calculation
     private void Damage()
     {
         pDamage = Random.Range(pMaxDamage, pMinDamage);
     }
-
+    //Player death & defence/health doesnt pass a certain threshold
     private void Update()
     {
         if(pHealth > pMaxHealth)
@@ -97,6 +97,7 @@ public class playerController : MonoBehaviour
         defend.interactable = true;
     }
 
+    //Player turn
     public void PlayerGo(int ButtonPress)
     {
         if (ButtonPress == 1 && energy >= 1)
@@ -122,28 +123,32 @@ public class playerController : MonoBehaviour
         }
         if (ButtonPress == 4)
         {
-            gameControl.enemyTurn = true;
+            gameControl.EnemyTurn();
+
             menu.SetActive(false);
-            
+            gameControl.turnCounter.text = "Turn: " + gameControl.turnCount;
+            gameControl.turnCount += 1;
+
         }
     }
 
-
-    public void Attack()
+    //Attack Calculation againts enemy/enemies
+    public void Attack(int listIndex)
     {
+        GameObject enemy = enemyGenerator.list[listIndex];
         Damage();
-        if (pDamage - enemyController.eDefence <= enemyController.eDefence)
+        if (pDamage - enemy.GetComponent<enemyController>().eDefence <= enemy.GetComponent<enemyController>().eDefence)
         {
-            enemyController.eDefence -= pDamage;
-            enemyController.edefenceMeter.UpdateMeter(enemyController.eDefence, enemyController.eMaxDefence);
+            enemy.GetComponent<enemyController>().eDefence -= pDamage;
+            enemy.GetComponent<enemyController>().edefenceMeter.UpdateMeter(enemy.GetComponent<enemyController>().eDefence, enemy.GetComponent<enemyController>().eMaxDefence);
         }
         //breaks defence + goes into health. Also if player has no defence
         else
         {
-            enemyController.eHealth = enemyController.eHealth - pDamage + enemyController.eDefence;
-            enemyController.eDefence = 0;
-            defenceMeter.UpdateMeter(enemyController.eDefence, enemyController.eMaxDefence);
-            enemyController.ehealthMeter.UpdateMeter(enemyController.eHealth, enemyController.eMaxHealth);
+            enemy.GetComponent<enemyController>().eHealth = enemy.GetComponent<enemyController>().eHealth - pDamage + enemy.GetComponent<enemyController>().eDefence;
+            enemy.GetComponent<enemyController>().eDefence = 0;
+            defenceMeter.UpdateMeter(enemy.GetComponent<enemyController>().eDefence, enemy.GetComponent<enemyController>().eMaxDefence);
+            enemy.GetComponent<enemyController>().ehealthMeter.UpdateMeter(enemy.GetComponent<enemyController>().eHealth, enemy.GetComponent<enemyController>().eMaxHealth);
         }
         damageOutput.SetActive(true);
         damageText.text = pDamage.ToString();
@@ -152,6 +157,8 @@ public class playerController : MonoBehaviour
 
     }
 
+
+    //Button Avaliability
     private void Buttons()
     {
         if (energy == 0 || selecting == true)

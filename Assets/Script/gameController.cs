@@ -24,7 +24,6 @@ public class gameController : MonoBehaviour
     {
         enemyTurn = false;
         turnCount = 0;
-        playerController.menu.SetActive(false);
         turnCounter.text = "Turn: " + turnCount;
         instructions.text = ("You have been attacked!\nPress 'E' to continue");
         playerController.healthNum.text = playerController.pHealth.ToString() + "/" + playerController.pMaxHealth.ToString();
@@ -54,11 +53,12 @@ public class gameController : MonoBehaviour
 
     public void EnemyTurn()
     {
+        instructions.text = ("");
             for (int i = 0; i < enemyGenerator.list.Count; i++)
             {
             enemyGenerator.list[i].GetComponent<enemyController>().EnemyStart();
             aggrovated = true;
-        }
+            }
     }
 
 }

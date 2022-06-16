@@ -10,7 +10,6 @@ public class playerController : MonoBehaviour
     public enemyGenerator enemyGenerator;
     public selectEnemy selectEnemy;
 
-
     //Sliders
     public propertyMeter healthMeter;
     public propertyMeter defenceMeter;
@@ -21,18 +20,16 @@ public class playerController : MonoBehaviour
     public Text defenceNum;
     public bool selecting = false;
     public GameObject selectMenu;
+    public bool playersTurn;
 
     //Stats
     public int pMaxHealth = 100;
-    public int pHealth;
-    
-    private int pMaxDamage = 10;
+    public int pHealth;    
+    private int pMaxDamage = 15;
     private int pMinDamage = 5;
     public int pDamage;
-
     public int pMaxDefence = 50;
     public int pDefence = 0;
-
     public int energy = 5;
     public Text energyCount;
 
@@ -40,6 +37,7 @@ public class playerController : MonoBehaviour
     public Button attack;
     public Button heal;
     public Button defend;
+    public Button end;
 
     //Other
     public Animator healAnim;
@@ -63,16 +61,19 @@ public class playerController : MonoBehaviour
         if(pHealth > pMaxHealth)
         {
             pHealth = pMaxHealth;
+            healthNum.text = pHealth.ToString() + "/" + pMaxHealth.ToString();
         }
 
         if(pDefence > pMaxDefence)
         {
             pDefence=pMaxDefence;
+            defenceNum.text = pDefence.ToString() + "/" + pMaxDefence.ToString();
         }
 
         if(pDefence <= 0)
         {
             pDefence = 0;
+            defenceNum.text = pDefence.ToString() + "/" + pMaxDefence.ToString();
         }
 
         if(pHealth <= 0)
@@ -84,14 +85,17 @@ public class playerController : MonoBehaviour
     }
     public void PlayerStart()
     {
-        menu.SetActive(true);
+        playersTurn = true;
         energyCount.text = energy.ToString();
         healthNum.text = pHealth.ToString() + "/" + pMaxHealth.ToString();
+        healthMeter.UpdateMeter(pHealth, pMaxHealth);
         defenceNum.text = pDefence.ToString() + "/" + pMaxDefence.ToString();
-        
+        defenceMeter.UpdateMeter(pDefence, pMaxDefence);
+
         heal.interactable = true;
         attack.interactable = true;
         defend.interactable = true;
+        end.interactable = true;
     }
 
     //Player turn
@@ -101,7 +105,9 @@ public class playerController : MonoBehaviour
         {
             selecting = true;
             energy -= 1;
+
         }
+        
         if (ButtonPress == 2 && energy >= 2 && pHealth < 100)
         {
             pHealth += 10;
@@ -111,20 +117,20 @@ public class playerController : MonoBehaviour
             energy -= 2;
             PlayerStart();
         }
+        
         if(ButtonPress == 3 && energy >= 2 && pDefence < 50)
         {
-            pDefence += 10;
-            defendText.text = 10.ToString();
+            pDefence += 15;
+            defendText.text = 15.ToString();
             defenceMeter.UpdateMeter(pDefence, pMaxDefence);
             defendAnim.Play("defend");
             energy -= 2;
             PlayerStart();
         }
+        
         if (ButtonPress == 4)
         {
             gameControl.EnemyTurn();
-
-            menu.SetActive(false);
             gameControl.turnCounter.text = "Turn: " + gameControl.turnCount;
             gameControl.turnCount += 1;
 
@@ -152,6 +158,11 @@ public class playerController : MonoBehaviour
         enemy.GetComponent<enemyController>().damageOutput.SetActive(true);
         enemy.GetComponent<enemyController>().damageText.text = pDamage.ToString();
         enemy.GetComponent<enemyController>().damageAnim.Play("damage");
+        
+        if (enemy.GetComponent<enemyController>().eHealth <= 0)
+        {
+            enemy.GetComponent<enemyController>().enemy.SetActive(false);
+        }
         selecting = false;
         PlayerStart();
     }
@@ -162,17 +173,24 @@ public class playerController : MonoBehaviour
     //Button Avaliability
     private void Buttons()
     {
-        if (energy == 0 || selecting == true)
+        if (energy == 0 || selecting == true || playersTurn == false)
         {
             attack.interactable = false;
         }
-        if (energy < 2 || pHealth == 100 || selecting == true)
+        
+        if (energy < 2 || pHealth == 100 || selecting == true || playersTurn == false)
         {
             heal.interactable = false;
         }
-        if (energy < 2 || pDefence == 50 || selecting == true)
+        
+        if (energy < 2 || pDefence == 50 || selecting == true || playersTurn == false)
         {
             defend.interactable=false;
+        }
+        
+        if(selecting == true || playersTurn == false)
+        {
+            end.interactable = false;
         }
     }
 

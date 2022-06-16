@@ -73,6 +73,10 @@ public class enemyController : MonoBehaviour
     //Enemy behaviour
     public void EnemyGo()
     {
+        if(enemy.GetComponent<enemyController>().eDefence > 0)
+        {
+            enemy.GetComponent<enemyController>().eDefence = 0;
+        }
         Action = Random.Range(1, 7);
         //Above 75%
         if (enemy.GetComponent<enemyController>().eHealth > enemy.GetComponent<enemyController>().eMaxHealth * 0.75)
@@ -133,6 +137,7 @@ public class enemyController : MonoBehaviour
         {
             playerController.pDefence -= enemy.GetComponent<enemyController>().eDamage;
             playerController.defenceMeter.UpdateMeter(playerController.pDefence, playerController.pMaxDefence);
+            playerController.defenceNum.text = playerController.pDefence.ToString() + "/" + playerController.pMaxDefence.ToString();
         }
         //breaks defence + goes into health. Also if player has no defence
         else
@@ -141,6 +146,8 @@ public class enemyController : MonoBehaviour
             playerController.pDefence = 0;
             playerController.defenceMeter.UpdateMeter(playerController.pDefence, playerController.pMaxDefence);
             playerController.healthMeter.UpdateMeter(playerController.pHealth, playerController.pMaxHealth);
+            playerController.healthNum.text = playerController.pHealth.ToString() + "/" + playerController.pMaxHealth.ToString();
+            playerController.defenceNum.text = playerController.pDefence.ToString() + "/" + playerController.pMaxDefence.ToString();
         }
 
     }
@@ -168,10 +175,11 @@ public class enemyController : MonoBehaviour
         yield return new WaitForSeconds(time);
         EnemyGo();
 
+        ehealthMeter.UpdateMeter(eHealth, eMaxHealth);
+        edefenceMeter.UpdateMeter(eDefence, eMaxDefence);
         gameController.PlayerTurn();
         playerController.energy = 5;
-        playerController.healthNum.text = playerController.pHealth.ToString() + "/" + playerController.pMaxHealth.ToString();
-        playerController.defenceNum.text = playerController.pDefence.ToString() + "/" + playerController.pMaxDefence.ToString();
+        playerController.energyCount.text = playerController.energy.ToString();
         isCoroutineOn = false;
     }
 

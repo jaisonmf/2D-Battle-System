@@ -18,11 +18,11 @@ public class enemyGenerator : MonoBehaviour
 
     public void EnemyGeneration()
     {
-        amount = Random.Range(2, 11);
+        amount = Random.Range(2, 10);
         {
             for(int i = 0; i < amount; i++)
             {
-                go = Instantiate(goblin, new Vector2((1920/(amount + 1)) * (i+1),10), Quaternion.identity);
+                go = Instantiate(goblin, new Vector2((1920/(amount + 1)) * (i+1),15), Quaternion.identity);
                 go.transform.SetParent(Parent.transform, false);
                 list.Add(go);
                 EnemyStats();

@@ -9,6 +9,8 @@ public class playerController : MonoBehaviour
     public gameController gameControl;
     public enemyGenerator enemyGenerator;
     public selectEnemy selectEnemy;
+    public loseScreen loseScreen;
+    public winScreen winScreen;
 
     //Sliders
     public propertyMeter healthMeter;
@@ -25,7 +27,7 @@ public class playerController : MonoBehaviour
     //Stats
     public int pMaxHealth = 100;
     public int pHealth;    
-    private int pMaxDamage = 15;
+    private int pMaxDamage = 20;
     private int pMinDamage = 5;
     public int pDamage;
     public int pMaxDefence = 50;
@@ -39,11 +41,12 @@ public class playerController : MonoBehaviour
     public Button defend;
     public Button end;
 
-    //Other
+    //Animated Text
     public Animator healAnim;
     public Animator defendAnim;
     public Text healText;
     public Text defendText;
+
 
     private void Start()
     {
@@ -80,6 +83,8 @@ public class playerController : MonoBehaviour
         {
             menu.SetActive(false);
             Destroy(this);
+            loseScreen.DeathScreen();
+
         }
         Buttons();
     }
@@ -101,14 +106,14 @@ public class playerController : MonoBehaviour
     //Player turn
     public void PlayerGo(int ButtonPress)
     {
-        //Attack
+        //Attack, player MUST have 1 energy point or more
         if (ButtonPress == 1 && energy >= 1)
         {
             selecting = true;
             energy -= 1;
 
         }
-        //Heal
+        //Heal, player MUST have 2 energy points or more
         if (ButtonPress == 2 && energy >= 2 && pHealth < 100)
         {
             pHealth += 10;
@@ -118,8 +123,8 @@ public class playerController : MonoBehaviour
             energy -= 2;
             PlayerStart();
         }
-        //Defend
-        if(ButtonPress == 3 && energy >= 2 && pDefence < 50)
+        //Defend, player MUST have 2 energy points or more
+        if (ButtonPress == 3 && energy >= 2 && pDefence < 50)
         {
             pDefence += 15;
             defendText.text = 15.ToString();
@@ -128,7 +133,7 @@ public class playerController : MonoBehaviour
             energy -= 2;
             PlayerStart();
         }
-        //End Turn
+        //End Turn, player can end turn whenever
         if (ButtonPress == 4)
         {
             gameControl.EnemyTurn();
@@ -164,6 +169,23 @@ public class playerController : MonoBehaviour
         {
             enemy.GetComponent<enemyController>().enemy.SetActive(false);
         }
+
+        bool alive = false;
+        for ( int i = 0; i < enemyGenerator.list.Count; i++)
+        {
+            if (enemyGenerator.list[i].GetComponent<enemyController>().eHealth > 0)
+            {
+                alive = true;
+            }
+
+        }
+        if (alive == false)
+        {
+            winScreen.Victory();
+        }
+        // if alive still false you win
+        
+
         selecting = false;
         PlayerStart();
     }

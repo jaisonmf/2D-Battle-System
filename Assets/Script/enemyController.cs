@@ -10,6 +10,7 @@ public class enemyController : MonoBehaviour
     public enemyGenerator enemyGenerator;
     public playerController playerController;
     public winScreen winScreen;
+    public loseScreen loseScreen;
 
     //Enemy GUI
     public GameObject enemy;
@@ -85,6 +86,12 @@ public class enemyController : MonoBehaviour
         yield return new WaitForSeconds(time);
         EnemyGo();
 
+        //Checks if the player has died
+        if( playerController.pHealth <= 0)
+        {
+            loseScreen.DeathScreen();
+        }
+        //Updates player health/defence bars, resets player energy to 5, starts the player turn
         ehealthMeter.UpdateMeter(eHealth, eMaxHealth);
         edefenceMeter.UpdateMeter(eDefence, eMaxDefence);
         gameController.PlayerTurn();
@@ -156,7 +163,6 @@ public class enemyController : MonoBehaviour
     public void Attack()
     {
         Damage();
-        Debug.Log(eDamage);
         //not enough to break defend
         if (enemy.GetComponent<enemyController>().eDamage - playerController.pDefence <= playerController.pDefence)
         {

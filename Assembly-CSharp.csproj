@@ -60,6 +60,7 @@
     <Compile Include="Assets\Script\playerController.cs" />
     <Compile Include="Assets\Script\enemyController.cs" />
     <Compile Include="Assets\Script\selectEnemy.cs" />
+    <Compile Include="Assets\Script\loseScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

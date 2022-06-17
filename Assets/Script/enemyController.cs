@@ -59,11 +59,7 @@ public class enemyController : MonoBehaviour
         }
     }
 
-    //Damage calculation
-    private void Damage()
-    {
-        eDamage = Random.Range(eMaxDamage, eMinDamage);
-    }
+
 
     //Enemy delay on turn + Enemy turn start
     public void EnemyStart()
@@ -129,11 +125,11 @@ public class enemyController : MonoBehaviour
         //Above 25%
         else if (enemy.GetComponent<enemyController>().eHealth > enemy.GetComponent<enemyController>().eMaxHealth * 0.25)
         {
-            if (Action == 1 || Action == 2 || Action == 3)
+            if (Action == 1 || Action == 2)
             {
                 Attack();
             }
-            else if (Action == 4 || Action == 5)
+            else if (Action == 3 || Action == 4)
             {
                 Defend();
             }
@@ -198,6 +194,12 @@ public class enemyController : MonoBehaviour
     }
 
 
-   
+    //Damage calculation
+    private void Damage()
+    {
+        eDamage = Random.Range(eMaxDamage, eMinDamage);
+    }
+
+
 
 }

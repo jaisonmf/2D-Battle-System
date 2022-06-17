@@ -53,11 +53,6 @@ public class playerController : MonoBehaviour
         pHealth = pMaxHealth;
     }
 
-    //Damage calculation
-    private void Damage()
-    {
-        pDamage = Random.Range(pMaxDamage, pMinDamage);
-    }
     //Player death & defence/health doesnt pass a certain threshold
     private void Update()
     {
@@ -191,6 +186,12 @@ public class playerController : MonoBehaviour
         }
 
 
+    }
+
+    //Damage calculation
+    private void Damage()
+    {
+        pDamage = Random.Range(pMaxDamage, pMinDamage);
     }
 
 

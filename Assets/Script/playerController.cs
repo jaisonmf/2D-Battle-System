@@ -148,12 +148,12 @@ public class playerController : MonoBehaviour
             enemy.GetComponent<enemyController>().eDefence -= pDamage;
             enemy.GetComponent<enemyController>().edefenceMeter.UpdateMeter(enemy.GetComponent<enemyController>().eDefence, enemy.GetComponent<enemyController>().eMaxDefence);
         }
-        //breaks defence + goes into health. Also if player has no defence
+        //breaks defence + goes into health. Also if enemy has no defence
         else
         {
             enemy.GetComponent<enemyController>().eHealth = enemy.GetComponent<enemyController>().eHealth - pDamage + enemy.GetComponent<enemyController>().eDefence;
             enemy.GetComponent<enemyController>().eDefence = 0;
-            defenceMeter.UpdateMeter(enemy.GetComponent<enemyController>().eDefence, enemy.GetComponent<enemyController>().eMaxDefence);
+            enemy.GetComponent<enemyController>().edefenceMeter.UpdateMeter(enemy.GetComponent<enemyController>().eDefence, enemy.GetComponent<enemyController>().eMaxDefence);
             enemy.GetComponent<enemyController>().ehealthMeter.UpdateMeter(enemy.GetComponent<enemyController>().eHealth, enemy.GetComponent<enemyController>().eMaxHealth);
         }
         enemy.GetComponent<enemyController>().damageOutput.SetActive(true);
@@ -172,7 +172,7 @@ public class playerController : MonoBehaviour
         bool alive = false;
         for (int i = 0; i < enemyGenerator.list.Count; i++)
         {
-            if (enemyGenerator.list[i].GetComponent<enemyController>().eHealth >= 0)
+            if (enemyGenerator.list[i].GetComponent<enemyController>().eHealth > 0)
             {
                 alive = true;
             }

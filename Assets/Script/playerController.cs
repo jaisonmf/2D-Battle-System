@@ -84,6 +84,7 @@ public class playerController : MonoBehaviour
         }
         Buttons();
     }
+    //Player turn starts, called by gameController & enemyController
     public void PlayerStart()
     {
         playersTurn = true;
@@ -165,6 +166,7 @@ public class playerController : MonoBehaviour
         {
             enemy.GetComponent<enemyController>().enemy.SetActive(false);
             enemy.GetComponent<enemyController>().alive = false;
+
 
         }
 

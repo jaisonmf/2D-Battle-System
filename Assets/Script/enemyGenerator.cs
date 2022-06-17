@@ -54,10 +54,10 @@ public class enemyGenerator : MonoBehaviour
             {
                 if (list[i].GetComponent<enemyController>().alive == true)
                 {
-                    list[i].GetComponent<enemyController>().eMaxHealth += 2;
-                    list[i].GetComponent<enemyController>().eMaxDamage += 2;
-                    list[i].GetComponent<enemyController>().eMinDamage += 2;
-                    list[i].GetComponent<enemyController>().eHealth += 2;
+                    list[i].GetComponent<enemyController>().eMaxHealth += 5;
+                    list[i].GetComponent<enemyController>().eMaxDamage += 5;
+                    list[i].GetComponent<enemyController>().eMinDamage += 5;
+                    list[i].GetComponent<enemyController>().eHealth += 5;
                 }
                 
             }

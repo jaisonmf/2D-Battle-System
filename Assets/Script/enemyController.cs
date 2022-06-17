@@ -35,7 +35,7 @@ public class enemyController : MonoBehaviour
     public int count;
     private int Action;
     public int eDamage;
-
+    public bool alive = true;
 
     //Certain stats cannot go over a certain threshold
     private void Update()

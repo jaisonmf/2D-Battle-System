@@ -48,6 +48,7 @@ public class playerController : MonoBehaviour
     public Text defendText;
 
 
+
     private void Start()
     {
         pHealth = pMaxHealth;
@@ -163,6 +164,8 @@ public class playerController : MonoBehaviour
         if (enemy.GetComponent<enemyController>().eHealth <= 0)
         {
             enemy.GetComponent<enemyController>().enemy.SetActive(false);
+            enemy.GetComponent<enemyController>().alive = false;
+
         }
 
         selecting = false;

@@ -27,7 +27,7 @@ public class enemyGenerator : MonoBehaviour
                 list.Add(go);
                 EnemyStats();
                 go.GetComponent<enemyController>().count = i;
-
+                enemyController.alive = true;
             }
 
         }
@@ -48,14 +48,18 @@ public class enemyGenerator : MonoBehaviour
 
     public void Aggression()
     {
-        if (gameController.turnCount > 7 && gameController.aggrovated == true)
+        if (gameController.turnCount > 7 && gameController.aggrovated)
         {
             for (int i = 0;i < list.Count; i++)
             {
-                list[i].GetComponent<enemyController>().eMaxHealth += 5;
-                list[i].GetComponent<enemyController>().eMaxDamage += 5;
-                list[i].GetComponent<enemyController>().eMinDamage += 5;
-                list[i].GetComponent<enemyController>().eHealth += 5;
+                if (list[i].GetComponent<enemyController>().alive == true)
+                {
+                    list[i].GetComponent<enemyController>().eMaxHealth += 2;
+                    list[i].GetComponent<enemyController>().eMaxDamage += 2;
+                    list[i].GetComponent<enemyController>().eMinDamage += 2;
+                    list[i].GetComponent<enemyController>().eHealth += 2;
+                }
+                
             }
             gameController.aggrovated = false;
         }

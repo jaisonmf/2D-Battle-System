@@ -27,8 +27,8 @@ public class playerController : MonoBehaviour
     //Stats
     public int pMaxHealth = 100;
     public int pHealth;    
-    private int pMaxDamage = 20;
-    private int pMinDamage = 5;
+    private int pMaxDamage = 50;
+    private int pMinDamage = 50;
     public int pDamage;
     public int pMaxDefence = 50;
     public int pDefence = 0;
@@ -170,10 +170,14 @@ public class playerController : MonoBehaviour
             enemy.GetComponent<enemyController>().enemy.SetActive(false);
         }
 
+        selecting = false;
+        PlayerStart();
+
+        //Checking whether all enemies are alive, if all enemies have less than or equal to 0 health, player wins
         bool alive = false;
-        for ( int i = 0; i < enemyGenerator.list.Count; i++)
+        for (int i = 0; i < enemyGenerator.list.Count; i++)
         {
-            if (enemyGenerator.list[i].GetComponent<enemyController>().eHealth > 0)
+            if (enemyGenerator.list[i].GetComponent<enemyController>().eHealth >= 0)
             {
                 alive = true;
             }
@@ -181,13 +185,12 @@ public class playerController : MonoBehaviour
         }
         if (alive == false)
         {
+            selecting = true;
             winScreen.Victory();
+            
         }
-        // if alive still false you win
-        
 
-        selecting = false;
-        PlayerStart();
+
     }
 
 

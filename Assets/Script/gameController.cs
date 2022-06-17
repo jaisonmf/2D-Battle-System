@@ -13,6 +13,7 @@ public class gameController : MonoBehaviour
     public enemyController enemyController;
     public playerController playerController;
     public enemyGenerator enemyGenerator;
+    public winScreen winScreen;
 
     public Text turnCounter;
     public int turnCount;
@@ -48,6 +49,7 @@ public class gameController : MonoBehaviour
             playerController.PlayerStart();
             instructions.text = ("Select your move");
             enemyGenerator.Aggression();
+
 
     }
 

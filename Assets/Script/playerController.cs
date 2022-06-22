@@ -164,7 +164,7 @@ public class playerController : MonoBehaviour
         {
             enemy.GetComponent<enemyController>().enemy.SetActive(false);
             enemy.GetComponent<enemyController>().alive = false;
-
+            energy += 1;
 
         }
 
@@ -178,6 +178,7 @@ public class playerController : MonoBehaviour
             if (enemyGenerator.list[i].GetComponent<enemyController>().eHealth > 0)
             {
                 alive = true;
+                
             }
 
         }

@@ -22,7 +22,7 @@ public class enemyGenerator : MonoBehaviour
         {
             for(int i = 0; i < amount; i++)
             {
-                go = Instantiate(goblin, new Vector2((1920/(amount + 1)) * (i+1),15), Quaternion.identity);
+                go = Instantiate(goblin, new Vector2((Screen.width/(amount + 1)) * (i+1),15), Quaternion.identity);
                 go.transform.SetParent(Parent.transform, false);
                 list.Add(go);
                 EnemyStats();

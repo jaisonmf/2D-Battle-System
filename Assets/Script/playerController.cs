@@ -47,8 +47,6 @@ public class playerController : MonoBehaviour
     public Text healText;
     public Text defendText;
 
-
-
     private void Start()
     {
         pHealth = pMaxHealth;
@@ -189,8 +187,6 @@ public class playerController : MonoBehaviour
             winScreen.Victory();
             
         }
-
-
     }
 
     //Damage calculation
@@ -198,9 +194,6 @@ public class playerController : MonoBehaviour
     {
         pDamage = Random.Range(pMaxDamage, pMinDamage);
     }
-
-
-
 
     //Button Avaliability
     private void Buttons()
@@ -225,6 +218,4 @@ public class playerController : MonoBehaviour
             end.interactable = false;
         }
     }
-
-
 }

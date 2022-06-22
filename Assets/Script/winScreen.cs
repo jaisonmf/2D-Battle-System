@@ -16,7 +16,7 @@ public class winScreen : MonoBehaviour
     public void Victory()
     {
         win.SetActive(true);
-        winText.text = ("You have survived the Encounter!\n Press 'E' to return home");
+        winText.text = ("You have survived the encounter!\n Press 'E' to return home");
         endGame = true;
         playerController.selecting = true;
     }

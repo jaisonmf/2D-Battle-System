@@ -59,8 +59,6 @@ public class enemyController : MonoBehaviour
         }
     }
 
-
-
     //Enemy delay on turn + Enemy turn start
     public void EnemyStart()
     {
@@ -95,8 +93,6 @@ public class enemyController : MonoBehaviour
         playerController.energyCount.text = playerController.energy.ToString();
         isCoroutineOn = false;
     }
-
-
 
     //Enemy behaviour
     public void EnemyGo()
@@ -193,13 +189,10 @@ public class enemyController : MonoBehaviour
         edefenceMeter.UpdateMeter(eDefence, eMaxDefence);
     }
 
-
     //Damage calculation
     private void Damage()
     {
         eDamage = Random.Range(eMaxDamage, eMinDamage);
     }
-
-
 
 }

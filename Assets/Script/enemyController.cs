@@ -62,11 +62,14 @@ public class enemyController : MonoBehaviour
     //Enemy delay on turn + Enemy turn start
     public void EnemyStart()
     {
-        playerController.end.interactable = false;
-        playerController.defend.interactable = false;
-        playerController.attack.interactable = false;
-        playerController.heal.interactable = false;
-        StartCoroutine(Delay(3));
+        if (alive == true)
+        {
+            playerController.end.interactable = false;
+            playerController.defend.interactable = false;
+            playerController.attack.interactable = false;
+            playerController.heal.interactable = false;
+            StartCoroutine(Delay(3));
+        }
     }
 
     //Enemy takes turn + ends turns
